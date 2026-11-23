@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Comprar Academia AI</title>
+<meta name="description" content="Acesso ao Academia AI: sistema de estudos universitários com IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: página de vendas em uma coluna — oferta à esquerda, cartão de pagamento fixo à direita no desktop. */
+:root{
+  --bg:#F2F4F8; --surface:#FFFFFF; --sunk:#E8ECF3; --ink:#111B2E; --muted:#58647A; --line:#DCE2EC;
+  --primary:#2340C8; --primary-ink:#FFFFFF; --primary-soft:#E4E9FC; --hl:#FFD43B; --hl-soft:#FFF1B8; --green:#1B7A45; --green-soft:#E0F2E7;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --shadow:0 1px 2px rgba(17,27,46,.05),0 8px 24px rgba(17,27,46,.07);
+}
+@media (prefers-color-scheme: dark){ :root{
+  --bg:#0B1019; --surface:#121A26; --sunk:#182232; --ink:#E6EBF3; --muted:#97A3B6; --line:#233046;
+  --primary:#8EA2FF; --primary-ink:#0B1019; --primary-soft:#1A2547; --hl:#EBC941; --hl-soft:#3A3212; --green:#61CD8E; --green-soft:#15301F; color-scheme:dark }}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:calc(18px + env(safe-area-inset-top,0px)) 0}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.02em}
+.brand mark{background:linear-gradient(transparent 58%,var(--hl) 58%);color:inherit;padding:0 3px}
+main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:40px;padding-block:40px 64px;align-items:start}
+@media (max-width:860px){ main{grid-template-columns:1fr;gap:28px;padding-block:24px 48px} }
+h1,h2,h3{font-family:var(--f-display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.05;font-weight:800}
+h2{font-size:20px} h3{font-size:16px}
+p{margin:0}
+.lead{font-size:17px;color:var(--muted);max-width:56ch}
+.offer{display:grid;gap:22px}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:3px}
+.feat b{font-size:14.5px} .feat span{font-size:13.5px;color:var(--muted)}
+.how{display:grid;gap:8px;counter-reset:s;padding:0;margin:0;list-style:none}
+.how li{display:flex;gap:12px;align-items:flex-start}
+.how li::before{counter-increment:s;content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:600 13px var(--f-mono)}
+.buy{position:sticky;top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:16px;box-shadow:var(--shadow);min-width:0}
+.price{font-family:var(--f-display);font-weight:800;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font:500 14px var(--f-body);color:var(--muted);display:block;margin-top:6px}
+label{display:grid;gap:5px;font-size:13px;font-weight:500}
+input{font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:10px 12px;width:100%}
+button,.btn{font:inherit;font-weight:600;font-size:15px;border-radius:10px;padding:11px 16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:center;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}
+.primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--sunk);padding:4px;border-radius:11px}
+.tabs button{border:0;background:transparent;padding:8px;font-size:14px;color:var(--muted)}
+.tabs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.qr{display:grid;place-items:center;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--line)}
+.qr img,.qr canvas{width:200px;height:200px}
+.copy{display:flex;gap:6px}
+.copy input{font:12px var(--f-mono)}
+.small{font-size:13px}
+.ref{font-family:var(--f-mono);letter-spacing:.06em;background:var(--hl-soft);padding:1px 6px;border-radius:5px;color:var(--ink)}
+a.btn[aria-disabled="true"]{opacity:.45;pointer-events:none} .muted{color:var(--muted)}
+.note{background:var(--sunk);border-radius:10px;padding:12px 14px;font-size:13.5px}
+.ok{background:var(--green-soft);color:var(--ink);border-radius:10px;padding:12px 14px;font-size:13.5px}
+footer{padding-block:0 calc(32px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header class="wrap"><div class="brand"><mark>Academia</mark> AI</div></header>
+<main class="wrap">
+  <section class="offer">
+    <h1>Estude para a prova com um professor de IA que conhece os seus materiais</h1>
+    <p class="lead">Você envia apostilas, slides e provas antigas. O Academia AI organiza o que é essencial, monta o cronograma até a prova e treina você com revisões, questões, simulados e flashcards.</p>
+    <div class="feats">
+      <div class="feat"><b>Prioridades da prova</b><span>Temas classificados de essencial a secundário, com a página de onde vieram.</span></div>
+      <div class="feat"><b>Cronograma até o dia da prova</b><span>Modos Normal, Expert e Urgência, com sessões guiadas e cronômetro.</span></div>
+      <div class="feat"><b>Questões e simulados</b><span>No estilo do seu professor, com correção comentada e nota.</span></div>
+      <div class="feat"><b>Memória do seu estudo</b><span>O tutor lembra o que você já fez e retoma de onde parou.</span></div>
+      <div class="feat"><b>Perfil para TDAH</b><span>Blocos curtos, uma coisa por vez, feedback imediato e leitura em voz alta.</span></div>
+      <div class="feat"><b>Lê PDF escaneado e fotos</b><span>Inclusive gráficos, esquemas e fórmulas.</span></div>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h2>Como funciona a compra</h2>
+      <ol class="how">
+        <li><span id="step1">Pague pelo PIX ao lado.</span></li>
+        <li><span>Toque em <b>Avisar que paguei</b>, com o <b>e-mail da sua conta do claude.ai</b>. Não precisa de comprovante: o pagamento é conferido no extrato.</span></li>
+        <li><span>Você recebe sua <b>matrícula e código de acesso</b> e o convite para abrir o app.</span></li>
+      </ol>
+      <p class="small muted">O app funciona dentro do claude.ai, com a sua conta (a gratuita serve). As respostas da IA usam o limite de uso da sua conta do Claude.</p>
+    </div>
+  </section>
+
+  <aside class="buy" id="buy">
+    <div id="closed" hidden class="note"><b>Vendas em breve.</b> As vendas ainda não foram abertas. Volte mais tarde.</div>
+    <div id="open" style="display:grid;gap:16px">
+      <div><div class="price" id="price"></div></div>
+      <label>Seu nome<input id="nome" autocomplete="name" maxlength="80"></label>
+      <label>E-mail da sua conta do claude.ai<input id="email" type="email" autocomplete="email" maxlength="120"></label>
+      <div class="tabs" role="group" aria-label="Forma de pagamento">
+        <button id="tPix" aria-pressed="true">PIX</button><button id="tCard" aria-pressed="false">Cartão</button>
+      </div>
+      <div id="pixBox" style="display:grid;gap:12px">
+        <div class="qr" id="qr"></div>
+        <div class="copy"><input id="pixCode" readonly aria-label="PIX copia e cola"><button id="pixCopy">Copiar</button></div>
+        <p class="small muted">Abra o app do seu banco, escolha PIX e leia o QR Code ou cole o código. Recebedor: <b id="pixNome"></b>.</p>
+      </div>
+      <div id="cardBox" hidden style="display:grid;gap:12px">
+        <a class="btn primary" id="cardLink" target="_blank" rel="noopener">Pagar com cartão de crédito</a>
+        <p class="small muted">Abre o site seguro de pagamento em outra aba. Se o checkout pedir uma descrição ou observação, informe o seu código de referência. Depois, volte aqui e toque em <b>Avisar que paguei</b>.</p>
+      </div>
+      <div style="display:grid;gap:8px">
+        <h3>Já pagou?</h3>
+        <p class="small muted">Seu código de referência: <b class="ref" id="ref"></b>. Ele vai junto no PIX e no aviso, para identificarmos o seu pagamento.</p>
+        <a class="btn primary" id="sendWa" target="_blank" rel="noopener" hidden aria-disabled="true">Avisar que paguei</a>
+        <p class="small" id="needData" style="color:var(--muted)">Preencha seu nome e o e-mail do claude.ai acima para avisar.</p>
+        <div id="sendMail" hidden class="note">Avise pelo e-mail <b id="mailAddr" style="user-select:all"></b> com seu nome, o e-mail do claude.ai e o código de referência.</div>
+        <p class="small muted">Depois que o pagamento for conferido, você recebe a matrícula, o código de acesso e o convite para abrir o app.</p>
+      </div>
+    </div>
+  </aside>
+</main>
+<footer class="wrap">Academia AI · sistema de estudos com IA. Não promete nota: o resultado depende do seu estudo.</footer>
+
+<script src="venda.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+"use strict";
+const V = window.VENDA || {};
+const $ = s => document.querySelector(s);
+const brl = v => Number(v).toLocaleString("pt-BR", {style:"currency", currency:"BRL"});
+// Texto sem acento e só com caracteres aceitos pelo padrão PIX
+const plain = (s, n) => String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z0-9 .,-]/g,"").trim().slice(0,n).toUpperCase();
+function crc16(str){ let c = 0xFFFF; for (let i=0;i<str.length;i++){ c ^= str.charCodeAt(i) << 8; for (let j=0;j<8;j++) c = (c & 0x8000) ? ((c << 1) ^ 0x1021) & 0xFFFF : (c << 1) & 0xFFFF; } return c.toString(16).toUpperCase().padStart(4,"0"); }
+const f = (id, v) => id + String(v.length).padStart(2,"0") + v;
+// BR Code estático do PIX (padrão EMV do Banco Central)
+function pixPayload({chave, nome, cidade, valor, txid}){
+  const mai = f("00","br.gov.bcb.pix") + f("01", chave.trim());
+  let p = f("00","01") + f("26", mai) + f("52","0000") + f("53","986") + (valor>0 ? f("54", valor.toFixed(2)) : "") + f("58","BR") + f("59", plain(nome,25)) + f("60", plain(cidade,15)) + f("62", f("05", (txid||"***").replace(/[^A-Za-z0-9]/g,"").slice(0,25) || "***"));
+  p += "6304"; return p + crc16(p);
+}
+// Código curto por comprador, guardado no navegador para não mudar ao recarregar
+let REF = ""; try { REF = localStorage.getItem("academia-ref") || ""; } catch {}
+if (!/^AC[A-Z0-9]{6}$/.test(REF)){ const A="ABCDEFGHJKMNPQRSTUVWXYZ23456789", r = new Uint32Array(6); crypto.getRandomValues(r); REF = "AC"+[...r].map(x=>A[x%A.length]).join(""); try { localStorage.setItem("academia-ref", REF); } catch {} }
+const preco = Number(V.preco)||0, hasPix = !!(V.pix && V.pix.chave && V.pix.nome && V.pix.cidade), hasCard = !!V.linkPagamento;
+if (!preco || (!hasPix && !hasCard)) { $("#closed").hidden = false; $("#open").hidden = true; }
+else {
+  $("#price").innerHTML = brl(preco) + `<small>${(V.periodo||"").replace(/[<>&]/g,"")}</small>`;
+  if (!hasPix || !hasCard){ $(".tabs").hidden = true; }
+  let METODO = hasPix ? "PIX" : "cartão de crédito";
+  if (hasPix && hasCard) $("#step1").textContent = "Pague pelo PIX ou com cartão de crédito ao lado.";
+  else if (hasCard) $("#step1").textContent = "Pague com cartão de crédito pelo link ao lado.";
+  const show = pix => { METODO = pix ? "PIX" : "cartão de crédito"; $("#sendWa") && $("#sendWa").dispatchEvent(new Event("refresh")); $("#pixBox").hidden = !pix; $("#cardBox").hidden = pix; $("#tPix").setAttribute("aria-pressed", pix); $("#tCard").setAttribute("aria-pressed", !pix); };
+  $("#tPix").onclick = () => show(true); $("#tCard").onclick = () => show(false);
+  show(hasPix);
+  if (hasCard && /^https:\/\//.test(V.linkPagamento)) $("#cardLink").href = V.linkPagamento;
+  if (hasPix){
+    const code = pixPayload({chave:V.pix.chave, nome:V.pix.nome, cidade:V.pix.cidade, valor:preco, txid:REF});
+    $("#pixCode").value = code; $("#pixNome").textContent = V.pix.nome;
+    if (window.QRCode) new QRCode($("#qr"), {text:code, width:200, height:200, correctLevel:QRCode.CorrectLevel.M});
+    else $("#qr").textContent = "Use o código copia e cola abaixo.";
+    $("#pixCopy").onclick = async () => { try { await navigator.clipboard.writeText(code); $("#pixCopy").textContent = "Copiado"; } catch { $("#pixCode").select(); } setTimeout(()=>$("#pixCopy").textContent="Copiar", 2000); };
+  }
+  $("#ref").textContent = REF;
+  const msg = () => `Olá! Paguei o ${V.produto||"acesso ao Academia AI"} (${brl(preco)}) pelo ${METODO}.\nNome: ${$("#nome").value.trim()}\nE-mail do claude.ai: ${$("#email").value.trim()}\nCódigo de referência: ${REF}`;
+  const wa = String(V.whatsapp||"").replace(/\D/g,"");
+  if (wa){ const a = $("#sendWa"); a.hidden = false;
+    const upd = () => { const ok = $("#nome").value.trim().length>1 && /\S+@\S+\.\S+/.test($("#email").value); a.setAttribute("aria-disabled", String(!ok)); $("#needData").hidden = ok; a.href = "https://wa.me/"+wa+"?text="+encodeURIComponent(msg()); };
+    upd(); ["#nome","#email"].forEach(s=>$(s).addEventListener("input", upd)); a.addEventListener("refresh", upd); }
+  else $("#needData").hidden = true;
+  if (V.email){ $("#sendMail").hidden = false; $("#mailAddr").textContent = V.email; }
+}
+</script>
+</body>
+</html>
